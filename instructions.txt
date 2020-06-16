@@ -1,0 +1,97 @@
+Goto https://github.com/Code-Institute-Org/gitpod-full-template
+    Use template
+    Name repo
+    Make public
+    Open Gitpod (you'll need the Gitpod addon)
+
+cli: pip3 install django
+cli: django-admin startproject boutique_ado .
+cli: touch .gitignore
+    add *.sqlite3
+    add *.pyc
+    add __pycache__
+
+In the file explorer now we'll see we have 3 new items: 
+boutique_ado    manage.py   .gitignore   
+
+cli: python3 manage.py runserver
+    to check - looks good
+
+cli: ^c
+    close server
+
+cli: python3 manage.py migrate
+cli: python3 manage.py createsuperuser
+
+cli: git status
+cli: git remote -v
+cli: git add .
+cli: git commit -m "initial commit"
+cli: git push
+
+cli: pip3 install django-allauth
+
+From allauth documentation copy and paste settings into settings.py file
+    https://django-allauth.readthedocs.io/en/latest/installation.html
+    you need:
+1)  'django.template.context_processors.request',           should already be there under templates
+    allows allauth and django to access the HTTP request object in our templates.
+    E.g., if we wanted to access request.user or request.user.email in our django templates. We'll be able to do it with this context processor.
+    It's required because the allauth templates which we'll see and customize later on use the request object frequently.
+2)  AUTHENTICATION_BACKENDS
+        remove before and after dots
+        see notes in the actual file
+3)  from INSTALLED_APPS
+        'django.contrib.sites',
+            used by the allauth.socialaccount to create the proper callback URLs
+        'allauth',
+            this is the actual allauth app
+        'allauth.account',
+            allows all the basic account login/logout/registration/password resets
+        'allauth.socialaccount'
+            allows logins via social media
+
+Then add the following phrase between AUTHENTICATION_BACKENDS and WSGI_APPLICATION = 'boutique_ado.wsgi.application': SITE_ID = 1
+
+
+
+
+Under todo
+    add templates folder
+        add todo folder
+            add todo_list.html file
+
+cli: python3 manage.py makemigrations --dry-run
+    migrations are Django's way of converting python code into sql language without the developer having to write any sql
+    this command (without the --dry-run flag) creates a file whereby any new 'class' in 'models.py' are staged for migration
+    use the dry run flag to do trial before commiting to an actual migration without the flag
+    Once you create a new 'class' in 'models.py' and run the command a new file apears in the migrations folder
+        e.g. 0001_initial.py 
+cli: python3 manage.py showmigrations
+    shows ocurred migrations i.e. stuff that comes with Django that allows superuser creation. You need to do the next command first
+cli: python3 manage.py migrate --plan
+    this essentially 'commits' changes
+    the --plan flag shows you what is staged for 'commit'. Not including it allows the migrate to actually occur
+
+
+cli: python3 manage.py tests
+    Will run all tests
+cli: python3 manage.py tests todo.test_forms
+    runs all tests in the test_forms
+cli: python3 manage.py tests todo.test_forms.TestItemForm
+    runs all tests in the TestItemForm class
+cli: python3 manage.py tests todo.test_forms.TestItemForm.test_item_name_is_required
+    Runs a specific single test
+
+cli: pip3 install coverage
+    installs coverage tool
+    tells you how much of your code has been tested
+cli: coverage run --source=todo manage.py test
+    selects file to test
+cli: coverage report
+     generates a report in the cli
+cli: coverage html
+    generates a folder called htmlcov, within it there is an html report that you can interrogate it will be called
+cli: python3 -m http.server
+    look at in the server
+    only the htmlcov/ link will open
