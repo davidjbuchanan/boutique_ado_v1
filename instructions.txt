@@ -34,7 +34,7 @@ cli: pip3 install django-allauth
 From allauth documentation copy and paste settings into settings.py file
     https://django-allauth.readthedocs.io/en/latest/installation.html
     you need:
-1)  'django.template.context_processors.request',           should already be there under templates
+1)  'django.template.context_processors.request',           should already be there under TEMPLATES
     allows allauth and django to access the HTTP request object in our templates.
     E.g., if we wanted to access request.user or request.user.email in our django templates. We'll be able to do it with this context processor.
     It's required because the allauth templates which we'll see and customize later on use the request object frequently.
@@ -50,8 +50,67 @@ From allauth documentation copy and paste settings into settings.py file
             allows all the basic account login/logout/registration/password resets
         'allauth.socialaccount'
             allows logins via social media
+4)  add the following phrase after AUTHENTICATION_BACKENDS section:
+    SITE_ID = 1
+5)  add the following phrase after SITE_ID = 1: 
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    Note: by default allauth will send confirmation emails to any new accounts. We need to temporarily log those emails to the console so we can get the confirmation links.
+6)  see below.
 
-Then add the following phrase between AUTHENTICATION_BACKENDS and WSGI_APPLICATION = 'boutique_ado.wsgi.application': SITE_ID = 1
+update urls.py (line 17 and 21) to give us the urls needed to login/logout etc
+
+cli: python3 manage.py migrate  
+    we added apps so now we have to make migrations
+
+cli: python3 manage.py runserver
+    see 404, goto /admin, login, click sites, click example, update domain name and display name. Save
+        critical if you want to use social media authentication
+
+cli: ^c
+
+6 continued)  add the following phrases after EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+        The account authentication method is what tells allauth that we want to allow authentication using either usernames or emails.
+    ACCOUNT_EMAIL_REQUIRED = True
+        email is required to register for the site.
+    ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+        Verifying your email is mandatory so we know users are using a real email.
+    ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+        required to enter their email twice on the registration page
+    ACCOUNT_USERNAME_MIN_LENGTH = 4
+        a minimum username length of four characters.
+    LOGIN_URL = '/accounts/login/'
+        specifying a login url and a url to redirect back to after logging in.
+    LOGIN_REDIRECT_URL = '/'
+        change to LOGIN_REDIRECT_URL = '/success' for the test below , then change it back
+
+cli: python3 manage.py runserver
+    see 404, goto /accounts/login/.
+    Login using the superuser id and password.
+        See 'Verify Your E-mail Address' but this won't work because this id was created before installing allauth.
+        Therefore, add email manually
+        goto /admin, see all models listed, click email addresses, click add email address, enter id, generate email, check all boxes, save, logout
+    goto /accounts/login/
+    Login using the superuser id and password.
+        see url ending in /success
+        this proves authentication is working properly
+        change the settings from '/success' back to '/'
+
+cli: pip3 freeze > requirements.txt
+
+cli:mkdir templates
+    this produces a project level templates file for base.html (so not an app based templates directory)
+
+cli:mkdir templates/allauth
+    puts an allauth dr in the templates dr (both or which will be in the project level)
+
+cli: git add .
+cli: git commit -m "setup allauth"
+cli: git push
+
+
+
+cli: mkdir -p home/templates/home
 
 
 
