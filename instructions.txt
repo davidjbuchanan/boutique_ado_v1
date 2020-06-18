@@ -136,8 +136,6 @@ cli: touch templates/base.html
     Update title
     move script files to header
 
-
-
 cli: git status
     see:
         templates/
@@ -146,7 +144,6 @@ cli: git commit -m "added allauth templates and base templates"
     see:
         47 file changes
 cli: git push
-
 
 back to project's base.html
     add {% add static %} 
@@ -160,10 +157,50 @@ cli: git add .
 cli: git commit -m "added blocks to base template"
 cli: git push
 
-
-
+cli: python3 manage.py startapp home
+    new app for homepege opens
+    see folders:
+        boutique_ado
+        templates
+        home folder
 
 cli: mkdir -p home/templates/home
+    makes a templates and internal home directory in the home app
+    - add an index.html file and add some test content
+
+Render the home app's index page
+-   create a view for the app's index page from the existing views.py file
+        at the app level goto home/views.py
+-   create a urls.py file for the app's index page by copying and pasting the projects urls.py file
+        goto boutique_ado at the project level and duplicate 'urls.py', put it in the app (home) and name it 'urls.py'
+            strip out the top docstring
+            delete the include import
+            delete the existing paths
+            include the import on line 3
+            include the path to the app's index.html on line 6
+-   update project level urls.py file line 22
+-   Goto project level settings.py file
+        add 'home' to the list of INSTALLED_APPS
+        add the following to the DIRS in TEMPLATES:
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
+cli: python3 manage.py runserver
+    see:
+        It works! in big green writing
+End(render the home app's index page)
+
+cli: ^c
+cli: git status
+    see:
+        boutique_ado/settings.py
+        boutique_ado/urls.py
+        instructions.txt
+        home/
+cli: git add .
+cli: git commit -m "added home app and templates"
+cli: git push
+
+        
 
 
 
