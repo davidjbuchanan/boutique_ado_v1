@@ -135,14 +135,30 @@ cli: touch templates/base.html
         Will allow support of older Internet Explorer versions and eliminate validation errors when validating our HTML.
     Update title
     move script files to header
-    add {% add static %} 
-        allows addition of static files later
+
+
 
 cli: git status
+    see:
+        templates/
 cli: git add .
 cli: git commit -m "added allauth templates and base templates"
+    see:
+        47 file changes
 cli: git push
 
+
+back to project's base.html
+    add {% add static %} 
+        allows addition of static files later
+    add lots of {%%} blocks
+
+cli: git status
+    see:
+        templates/base.html
+cli: git add .
+cli: git commit -m "added blocks to base template"
+cli: git push
 
 
 
