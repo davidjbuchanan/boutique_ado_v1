@@ -104,9 +104,46 @@ cli:mkdir templates
 cli:mkdir templates/allauth
     puts an allauth dr in the templates dr (both or which will be in the project level)
 
+cli: git status
+    see:
+        boutique_ado/settings.py
+        boutique_ado/urls.py
+        instructions.txt
+        requirements.txt
 cli: git add .
 cli: git commit -m "setup allauth"
 cli: git push
+
+Customise the supplied allauth templates:
+-   they live in the site-packages directory (see hello django repo on github)
+cli: cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/
+    cp - r which means to copy(cp) recursively (-r)
+     ../ to go up one level from where we are right now
+    .pip-modules/lib /python (press tab to autopoulate)
+    /site-packages /allauth/templates
+    /* copies everything in the directory
+     ./templates/allauth/ is the destination you want to move to
+-   If you want to use the standard allauth templates i.e. not customise them then delete from the templates/allauth dr
+        delete openid
+        delete tests
+End (customise the supplied allauth templates)
+
+cli: touch templates/base.html
+    opens a file in the project level's template directory (i.e. not the app level)
+    goto getbootstarp, vlick documentation, scroll to starter template, copy it paste it in to base,html
+    add a line to base.html header: <meta http-equiv="X-UA-compatible" content="ie=edge">
+        Will allow support of older Internet Explorer versions and eliminate validation errors when validating our HTML.
+    Update title
+    move script files to header
+    add {% add static %} 
+        allows addition of static files later
+
+cli: git status
+cli: git add .
+cli: git commit -m "added allauth templates and base templates"
+cli: git push
+
+
 
 
 
