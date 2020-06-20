@@ -205,7 +205,81 @@ cli: git status
     see:
        home/templates/home/index.html
 cli: git add .
-cli: git commit -m "Added homepage content
+cli: git commit -m "Added homepage content"
 cli: git push        
 
+Update templates/base.html
+cli: git status 
+    see:
+       templates/base.html
+cli: git add .
+cli: git commit -m "Added main page header"
+cli: git push        
 
+cli: python3 manage.py runserver
+    see:
+        really rough looking home page
+    Note: If you perform a search e.g. search for frog then the resultant url will end .gitpod.io/?q=frog. The q confirms the form is working as the form's name=q - see project level template/base.html
+
+cli: mkdir static
+    where css and js files will live
+cli: mkdir static/css 
+    then create a base.css file
+    add styling for html and body tags 
+cli: mkdir media
+    holds the images and is where new images are uploaded to
+    add homepage_background_cropped.jpg
+
+cli: python3 manage.py runserver
+    see:
+        really rough looking home page - but can't see background image
+
+goto static/css/base.css file
+    add the rest of the css
+
+goto templates/base.html
+    add base.css link
+    add Lato font link
+        goto google fonts
+        search for Lato
+        click lato 
+        select regular 400 and + select this style
+        click Embed 
+        copy and paste link
+    add FA font link
+        goto FA
+        login
+        scroll to FA fits 
+        click manage kits 
+        click aOff73228b
+        copy and paste link
+
+goto settings.py and underneath the STATIC_URL setting.
+    add STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+        Which is going to tell Django where all of our static files are located.
+        It is worth noting that although normally we would also want to supply a static route setting here for Django's collect static utility to work.
+        I'm not going to do that because it will interfere with setting up Amazon Web Services later on.
+        Has to be a tuple, hence the brackets and comma at end
+    add MEDIA_URL = '/media/'
+    add MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+        which is where all uploaded media files will go.
+
+To allow Django to see the media (remember the background image with the girl is still not visible
+    goto boutique_ado/urls.py
+        import settings
+        import the static function
+            to add the MEDIA_URL to our list of URLs.
+        then use the static function:
+            add + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+cli: python3 manage.py runserver
+    see:
+        looks good - can see background image
+
+cli: git status
+    see:
+        media
+        static
+cli: git add .
+cli: git commit -m "completed home page header and css"
+cli: And git push

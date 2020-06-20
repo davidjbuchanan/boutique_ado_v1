@@ -1,0 +1,92 @@
+html {
+    height: 100%;
+}
+/*set the HTML elements height to 100% as this will allow our h100 classes in vertical centering to work*/
+
+body {
+    background: url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: calc(100vh - 164px);
+    /*I also want to add a height calculation to the body element. Which will be 100vh minus 164 pixels - the eventual height of our top header.*/
+    color: #555;
+    font-family: 'Lato';
+}
+
+/* from Bulma */
+/*I've taken this icon class from another CSS framework similar to bootstrap called Bulma. Which will ensure that whenever we use font awesome icons.
+They will always stay perfectly centred and have a consistent size unless we manually change it. The logo font class will be used throughout this site*/
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.logo-font {
+/*The logo font class will be used throughout this site to maintain consistency with the uppercase font of the logo whenever we want to call attention to something.*/
+    text-transform: uppercase;
+}
+
+.main-logo-link {
+/*the main logo link class here just makes it so that the logo only takes up as much space as the text requires and no more.*/
+    width: fit-content;
+}
+
+/*These next several lines are styling which we'll use consistently throughout the site for buttons so that they match the theme of the shop now button on the homepage.*/
+.shop-now-button {
+    background: black;
+    color: white;
+    min-width: 260px;
+}
+
+.btn-black {
+    background: black;
+    color: white;
+}
+
+.shop-now-button:hover,
+.shop-now-button:active,
+.shop-now-button:focus,
+.btn-black:hover,
+.btn-black:active,
+.btn-black:focus {
+    background: #222;
+    color: white;
+}
+
+/*I've added a text-black class and a border-black class similar to bootstraps colour helper classes like text success text info and so on*/
+.text-black {
+    color: #000 !important;
+}
+
+.border-black {
+    border: 1px solid black !important;
+}
+
+/* -------------------------------- Media Queries */
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 80%;
+  }
+}
+/*the first one will widen the default bootstrap container class on extra-large screens just to make better use of the available screen real estate for people with extra-large monitors.*/
+
+/* fixed top navbar only on medium and up */
+@media (min-width: 992px) {
+    .fixed-top-desktop-only {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+/*for the main site navbar, */
+
+    .header-container {
+        padding-top: 164px;
+    }
+/*This will add 164 pixels of padding to our header container class to push the body down to the bottom of the main page header. This is the page header block that we added at the top of the index.html page in the home app.*/
+}
