@@ -157,7 +157,7 @@ cli: git add .
 cli: git commit -m "added blocks to base template"
 cli: git push
 
-cli: python3 manage.py startapp home
+---------------------------------------------------------------------------------------------------------------------------------------------------------cli: python3 manage.py startapp home
     new app for homepege opens
     see folders:
         boutique_ado
@@ -300,11 +300,12 @@ Now we add header for small viewports and extend the header features (for all vp
         see a responsive header with all functionality
 end (Now we add header for small viewports ........... to allow users to sort)
 
-set up free shipping banner
-    add free_shipping_threshold to base.html (which will then link to products app later) and class to base.css
-    check to out:
-        cli: python3 manage.py runserver
-            see a banner that doesn't function yet - need to add products app
+---------------------------------------------------------------------------------------------------------------------------------------------------------start Products app
+    set up free shipping banner
+        add free_shipping_threshold to base.html (which will then link to products app later) and class to base.css
+        check to out:
+            cli: python3 manage.py runserver
+                see a banner that doesn't function yet - need to add products app
 
 cli: git status
     see:
@@ -314,6 +315,74 @@ cli: git status
 cli: git add .
 cli: git commit -m "added mobile_header and main navbar"
 cli: And git push
+
+download images from CI into media directory. Goto:
+    https://github.com/Code-Institute-Solutions/boutique_ado_images/tree/master/pics
+    go back a page
+    click clone or download
+    click download zip
+    goto c drive downloads on your computer
+    right click 
+    select Extract All..
+    then drag and drop into media file
+
+cli: python3 manage.py startapp products
+
+goto settings.py    
+    add products to INSTALLED_APPS
+
+cli: mkdir products/fixtures
+    Fixtures are used to load data very quickly into a django database so we don't have to do it all manually in the admin.
+    Drag and drop the categories and products json files from the earlier download
+        Read the json files on a reader, e.g. https://jsonformatter.org/
+            Each item has a primary key; the model it'll use; a category id (which refers to the primary key) of one of the categories in the other fixture file.
+            When we use these fixtures we'll first create the categories and then the productssince Django will need to know which category each product goes in.
+
+Goto products/models.py
+    add class for Category and Product
+    Notes on code:
+    Add a friendly name for the front end. Max length of 254. Null equals true and blank equals true so that the friendly name is optional.
+    If you look at bed and bath in the categories fixture for example you'll see the friendly name is a bit nicer, but the name field gives us a
+    programmatic way to find it in things like views and other code.
+    create a string method: Which takes in the category model itself. And then returns self.name
+    For the on_delete: set any products that use it to have null for this field rather than deleting the product.
+    Each product requires a name, a description, and a price. But everything else is optional.
+
+cli: python3 manage.py makemigrations --dry-run
+    identify any potential issues
+        Error: ModuleNotFoundError: No module named 'homeproducts'
+            turns out I was missing a comma in the settings.py 
+cli: python3 manage.py makemigrations --dry-run
+        Errors: Cannot use image field because Pillow is not installed
+cli: pip3 install pillow
+cli: python3 manage.py makemigrations --dry-run
+    no issues
+cli: python3 manage.py makemigrations
+    creates models
+cli: python3 manage.py migrate --plan
+    to see if there are any issues with the models
+    no issues
+cli: python3 manage.py migrate
+    note: shouldn't use this command freely as it could migrate multiple apps
+
+Goto products/admin.py
+    import Product and Category models
+
+So we've got our models created; our fixtures ready to go; our product images uploaded; and our migrations applied. The only thing left to do is actually use these fixtures.
+
+cli: python3 manage.py loaddata categories
+    see:
+        the cli should show 9 objects installed onto Django
+cli: python3 manage.py loaddata products
+    see:
+        the cli should show 172 objects installed onto Django
+
+cli: python3 manage.py runserver
+Goto /admin see Categorys (intentional misspell) and Products 
+
+
+
+
 
 
 
