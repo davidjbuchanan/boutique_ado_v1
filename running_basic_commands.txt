@@ -1,0 +1,38 @@
+We're going to get our first look at the Command Line Interface, or CLI for short.
+Now the tool that we're going to be using to work with the Command Line Interface is called the terminal.
+Every operating system allows access to the terminal.
+
+Gitpod is a cloud-based IDE, 
+    which runs on the Linux operating system.
+    The CLI we're using here is called bash.
+
+(If you chose to install your own editor, such as VS Code or Sublime Text, then you can use the same commands if your operating system is Linux or Mac OS. If you chose to install your own editor and you use Windows, then you will need to install a utility called Git Bash. These commands will not work in the Windows command prompt)
+
+So, we have our terminal open here.
+    The first part of the prompt is our username, 
+    the next part tells us the current directory that we're in
+    and then we have a dollar sign.
+
+The first command that we're going to use is one called "echo".
+    An echo works like a print statement.
+    If I type "echo Hello World", it prints, or echoes out, "Hello World" to the console.
+    If I do "echo Hello CI" then, as you can see, "Hello CI" is echoed, or printed, to the console.
+
+The next command that we're going to look at is the history command.
+    This is very useful for accessing commands via shortcuts.
+    As you can see, it gives us a full history of the commands we've typed already.
+    Number three is "history", two is "echo Hello Cloud9", and one is "echo Hello World".
+    The numbers on the left-hand side indicate the IDs of the commands.
+    And we can use the "!" to access them, followed by the number of the command we want to run.
+    So if I do "!1", it says "echo Hello World", which is the command we want to run, and then, underneath, the output, which is "Hello World".
+    Similarly, if I do "!" and give it the ID of 3, then that will give us our history command again.
+    You can see all of the commands that we've run are in the history.
+
+If the terminal gets too cluttered, we can just use the "clear" command.
+    That will just clear the screen.
+    Notice, it doesn't clear the history.
+    It just removes text from the screen to make it look cleaner.
+
+
+As you can see when I run history, we still have "clear" showing in our command history.
+
