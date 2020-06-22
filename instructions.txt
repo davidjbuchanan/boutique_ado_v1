@@ -274,7 +274,7 @@ To allow Django to see the media (remember the background image with the girl is
 
 cli: python3 manage.py runserver
     see:
-        looks good - can see background image
+        looks good - can see background image. The main site header is now visible on large viewports only. With the logo in the upper left the search bar in the middle and the My account and shopping bag links on the right.
 
 cli: git status
     see:
@@ -283,3 +283,36 @@ cli: git status
 cli: git add .
 cli: git commit -m "completed home page header and css"
 cli: And git push
+
+Now we add header for small viewports and extend the header features (for all vp sizes) to allow users to sort
+    goto templates/base.html
+        add further navbar Code
+        Note: this won't preview (i.e. python3 manage.py runserver) because of the Django Template Logic is not linked to anything so 404 error.
+
+    cli: mkdir templates/includes
+        a commonly occuring directory in larger web projects
+        place to create HTMLsnippets and then include them in the base.html template using Django.
+        Create 2 new files:
+            main-nav.html
+            mobile-top-header.html
+    
+    cli: python3 manage.py runserver
+        see a responsive header with all functionality
+end (Now we add header for small viewports ........... to allow users to sort)
+
+set up free shipping banner
+    add free_shipping_threshold to base.html (which will then link to products app later) and class to base.css
+    check to out:
+        cli: python3 manage.py runserver
+            see a banner that doesn't function yet - need to app products app
+
+cli: git status
+    see:
+        static/css/base.css
+        templates/base.html
+        templates/includes/
+cli: git add .
+cli: git commit -m "added mobile_header and main navbar"
+cli: And git push
+
+

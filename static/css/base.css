@@ -64,6 +64,9 @@ They will always stay perfectly centred and have a consistent size unless we man
     border: 1px solid black !important;
 }
 
+.bg-black {
+    background: #000 !important;
+} /* for free shipping banner */
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
