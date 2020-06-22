@@ -13,26 +13,74 @@ So, we have our terminal open here.
     the next part tells us the current directory that we're in
     and then we have a dollar sign.
 
-The first command that we're going to use is one called "echo".
+ECHO
     An echo works like a print statement.
-    If I type "echo Hello World", it prints, or echoes out, "Hello World" to the console.
-    If I do "echo Hello CI" then, as you can see, "Hello CI" is echoed, or printed, to the console.
+    cli: echo Hello World
+        see Hello World on the cli
+    cli: echo "Hello World" >> hello.html
+        words are directed (>>) into the hello.html file
 
-The next command that we're going to look at is the history command.
+TOUCH
+    creates a file
+    cli: touch hello.html
+
+MKDIR
+    creates a directory
+    cli: mkdir Hello
+
+RM
+    removes file
+    cli: rm hello.html
+    removes folder / directory
+    cli: rm -rf Hello
+
+COPY
+    cli: cp hello.html Hello
+        copies hello.html and puts it in Hello directory
+
+MOVE
+    cli: my hello.html Hello    
+        movies hello.html into Hello
+
+DUPLICATE
+    cli: cp hello.html bonjour.html
+        copies hello.html and makes a new file called bonjour.html (in the same place)
+
+HISTORY
     This is very useful for accessing commands via shortcuts.
-    As you can see, it gives us a full history of the commands we've typed already.
-    Number three is "history", two is "echo Hello Cloud9", and one is "echo Hello World".
     The numbers on the left-hand side indicate the IDs of the commands.
-    And we can use the "!" to access them, followed by the number of the command we want to run.
-    So if I do "!1", it says "echo Hello World", which is the command we want to run, and then, underneath, the output, which is "Hello World".
-    Similarly, if I do "!" and give it the ID of 3, then that will give us our history command again.
-    You can see all of the commands that we've run are in the history.
+    cli: !1 
+        see command and output
 
-If the terminal gets too cluttered, we can just use the "clear" command.
-    That will just clear the screen.
-    Notice, it doesn't clear the history.
+CLEAR
+    cli: clear
+    That will just clear the screen, it doesn't clear the history.
     It just removes text from the screen to make it look cleaner.
 
+PWD
+    cli: PWD
+    We can find out which directory we're currently in 
+    stands for "print working directory" 
 
-As you can see when I run history, we still have "clear" showing in our command history.
+LS
+    cli: ls
+    lists all the files in our current directory.
+
+CD 
+    cli: cd
+    stands for "change directory".
+    cli: cd ..
+        will bring us back up one level.
+    cli: cd ../../
+        will bring us back up two levels.
+    Note: directories are printed in bold text, files are shown as regular text.
+    cli: cd bloutique_ado
+        takes you directly to boutique_ado directory (synonym of folder)
+    cli: cd
+        takes you to the very top of the file tree
+    cli: cd - 
+        takes you back to where you last were
+    cli: cd ~/ 
+    cli: cd ~
+
 
