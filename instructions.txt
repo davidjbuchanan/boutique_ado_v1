@@ -228,7 +228,7 @@ cli: mkdir static/css
     add styling for html and body tags 
 cli: mkdir media
     holds the images and is where new images are uploaded to
-    add homepage_background_cropped.jpg
+    add homepage_background_cropped.jpg from Kaggle.com
 
 cli: python3 manage.py runserver
     see:
@@ -304,7 +304,7 @@ set up free shipping banner
     add free_shipping_threshold to base.html (which will then link to products app later) and class to base.css
     check to out:
         cli: python3 manage.py runserver
-            see a banner that doesn't function yet - need to app products app
+            see a banner that doesn't function yet - need to add products app
 
 cli: git status
     see:
@@ -314,5 +314,7 @@ cli: git status
 cli: git add .
 cli: git commit -m "added mobile_header and main navbar"
 cli: And git push
+
+
 
 

@@ -19,6 +19,7 @@ ECHO
         see Hello World on the cli
     cli: echo "Hello World" >> hello.html
         words are directed (>>) into the hello.html file
+        creates the hello.html file if it didn't already exist
 
 TOUCH
     creates a file
@@ -65,6 +66,8 @@ PWD
 LS
     cli: ls
     lists all the files in our current directory.
+    cli: ls -a
+    shows all files including hidden files (i.e. files that are preceded witha dot)
 
 CD 
     cli: cd
