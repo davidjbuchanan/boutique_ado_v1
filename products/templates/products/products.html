@@ -35,11 +35,12 @@
                             <!--The card is divided into a top. Which contains our product image-->
                                 {% if product.image %}
                                 <!-- an if statement that renders the product image using the image fields URL attribute if an image exists. Or the default image from the media folder otherwise.-->
-                                <a href="">
+                                <a href="{% url 'product_detail' product.id %}">
+                                <!--it is product.id and not product_id because in the template we are dealing with the actual Django object-->
                                     <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
                                 </a>
                                 {% else %}
-                                <a href="">
+                                <a href="{% url 'product_detail' product.id %}">
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                                 </a>
                                 {% endif %}

@@ -106,3 +106,14 @@ They will always stay perfectly centred and have a consistent size unless we man
     }
 /*This will add 164 pixels of padding to our header container class to push the body down to the bottom of the main page header. This is the page header block that we added at the top of the index.html page in the home app.*/
 }
+
+/* pad the top a bit when navbar is collapsed on mobile */
+@media (max-width: 991px) {
+    .header-container {
+        padding-top: 116px;
+    }
+
+    body {
+        height: calc(100vh - 116px);
+    }
+}

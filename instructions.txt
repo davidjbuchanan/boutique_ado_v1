@@ -446,11 +446,20 @@ cli: python3 manage.py runserver
 
 gooto products/templates/products/products.html 
     populate
+    use Django built in templates   
+        https://docs.djangoproject.com/en/3.0/ref/templates/builtins/
 
 cli: git add .
 cli: git commit -m "started product template"
 cli: git push
 
+Link products page to navbar and callout
+    Callout: templates/home/index.html
+    Navbar: templates/includes/main-nav.html 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Product details page
+    To create the product details page we need a new view which will take the product id as a parameter and return the template including the product, this will be almost identical to the all products view so I'll copy that as a base.
 
-
+Goto products/views.py  
+    copy and paste beneath
