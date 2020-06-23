@@ -428,8 +428,28 @@ Create a templates and inner products directory simultaneously
     cli: mkdir -p products/templates/products
     create a products.html file
         populate with the header (from home template) and the products template variable in double curly braces
+    cli: python3 manage.py runserver
+    goto /products  
+        see:
+            big json file - looks ugly
+
+cli: git add .
+cli: git commit -m "added views and template"
+cli: git push
+
+goto products/templates/products/products.html and static/css/base.css
+    populate with white overlay class
+    
+cli: python3 manage.py runserver 
+    check the products page is white and has json data
 
 
+gooto products/templates/products/products.html 
+    populate
+
+cli: git add .
+cli: git commit -m "started product template"
+cli: git push
 
 
 

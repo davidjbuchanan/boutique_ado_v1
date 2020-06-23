@@ -10,10 +10,85 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="overlay"></div>
+     <!--The first thing we need is a full-page overlay in order to cover up the body's background image and give this page a white background.
+    Let's add that here at the top and then jump to base.css and add its CSS.-->
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                {{ products }}
+        <!--contains the page title and any currently selected categories.-->
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">Products</h2>
+                <hr class="w-50 mb-1">
+                <!--a single column with the heading using our logo font class. And a 50% width horizontal rule.-->
+            </div>
+        </div>
+        <div class="row">
+        <!--contains the products themselves.-->
+            <div class="product-container col-10 offset-1">
+            <!--a single column offset by one and itself will be divided into two rows.-->
+                <div class="row mt-1 mb-2"></div>
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <!--a simple Django for loop to iterate through the product variable. For each product, I want to generate a column inside which will be a bootstrap card. Products will stack on mobile be side-by-side on small and medium screens. split into three columns on large. And four columns on extra-large.-->
+                            <div class="card h-100 border-0">
+                            <!--The card is divided into a top. Which contains our product image-->
+                                {% if product.image %}
+                                <!-- an if statement that renders the product image using the image fields URL attribute if an image exists. Or the default image from the media folder otherwise.-->
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                </a>
+                                {% else %}
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                </a>
+                                {% endif %}
+                                <div class="card-body pb-0">
+                                <!--A body which will contain the product name. -->
+                                    <p class="mb-0">{{ product.name }}</p>
+                                </div>
+                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                <!--a footer containing the price and rating.-->
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
+                                            {% if product.rating %}
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
+                                            {% else %}
+                                                <small class="text-muted">No Rating</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- create a full-width horizontal rule after each row of products. But since the product cards are all columns inside a single row. The number of products in each row will change depending on the screen size.-->
+                        {% if forloop.counter|divisibleby:1 %}
+                        <!--use built-in django template tags in an if statement.-->
+                            <div class="col-12 d-sm-none mb-5">
+                            <!--see on mobile portrait only-->
+                                <hr>
+                            </div>
+                        {% endif %}                        
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                            <!--see on mobile landscape / ipad portrait only-->
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:4 %}
+                            <div class="col-12 d-none d-xl-block mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

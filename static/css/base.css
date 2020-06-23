@@ -67,6 +67,19 @@ They will always stay perfectly centred and have a consistent size unless we man
 .bg-black {
     background: #000 !important;
 } /* for free shipping banner */
+
+.overlay {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: white;
+	z-index: -1;
+}
+/*It's going to be a 100% height and width div. Fixed at the top left of the screen. With the white background and a z-index of negative 1 to make sure that it sits behind all the content. I'm putting this in base.css since we'll reuse it in most of the other templates on the site as well.*/
+
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
