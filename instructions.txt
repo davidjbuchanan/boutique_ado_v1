@@ -378,9 +378,56 @@ cli: python3 manage.py loaddata products
         the cli should show 172 objects installed onto Django
 
 cli: python3 manage.py runserver
-Goto /admin see Categorys (intentional misspell) and Products 
+Goto /admin 
+    see: 
+        Products
+        see:
+            Categorys (intentional misspell) and Products 
+       
+cli: git status
+    seetings.pv
+    loads of images
+    products
+cli: git add .
+cli: git commit -m "added products app, models and fixtures"
+cli: git push
 
+To fix the misspelling of Catagorys add the class Meta to products/models.py
+    this update to the model doesn't require migration as there is no change to the class structure
 
+cli: python3 manage.py runserver
+Goto /admin 
+    see:
+        Products
+        see:
+            Categories (misspell corrected) and Products
+            check products  
+                see a massive vertical list of product names
+                    To fix goto products/admin.py
+                        add class ProductAdmin
+
+cli: python3 manage.py runserver
+    Goto /admin/Products/Products 
+        see:
+            look at all the products listed out nicely
+cli: git add .
+cli: git commit -m "customized admin"
+
+So now we can see our products in the websites Django Admin page. Lets get a view so we can see them on the website's GUI like a user would
+Goto products/views.py
+    populate
+
+Create products/url.py
+    populate
+
+Reference them in the project level urls
+    goto boutique_ado/urls.py
+        update with path to products url
+
+Create a templates and inner products directory simultaneously  
+    cli: mkdir -p products/templates/products
+    create a products.html file
+        populate with the header (from home template) and the products template variable in double curly braces
 
 
 
