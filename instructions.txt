@@ -461,5 +461,41 @@ Link products page to navbar and callout
 Product details page
     To create the product details page we need a new view which will take the product id as a parameter and return the template including the product, this will be almost identical to the all products view so I'll copy that as a base.
 
-Goto products/views.py  
-    copy and paste beneath
+add to products/views.py  
+
+add to products/urls.py
+
+add a products/templates/product_detail.html file
+
+goto products/templates/products.html
+    put in links to product_detail.html file
+
+cli: git add .
+cli: git commit -m "added product details functionality"
+cli: git push
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Queries and Categories
+Goto templates/base.html
+    see form at line 49
+        this is where the search form request is sent to
+
+Similarly
+    Goto templates/includes/mobile-top-header.html
+    see form at line 14
+        this is where the search form request is sent to
+
+We can access those url parameters in the all_products view by checking whether request.get exists.
+    Goto products/views.py
+
+I created a views_annotated.py with all the comments in.
+
+Test:
+cli: python3 manage.py runserver
+    search works for jeans - returns products called jeans
+    search works for soft - returns products with a soft in the description
+    conclusion search works for products and descriptions
+
+cli: git add . 
+cli: git commit -m "Added search functionality"
+cli: git push
