@@ -8,10 +8,15 @@ from .models import Product
 
 def all_products(request):
     # a view to render all products and to show sorting and search queries
+
+
     products = Product.objects.all()
     query = None
+
+
     # start with it as none at the top of this view to ensure we don't get an error when loading the products page without a search term.
-    
+
+
     """
     Since we named the text input in the form as the letter q (see form in base.html or mobile-top-header.html). We can just check if q is in 
     request.get, if it is I'll set it equal to a variable called query (query = request.GET['q']). If the query is blank it's not going to return any
@@ -20,14 +25,17 @@ def all_products(request):
     Import messages, redirect, and reverse up top.
     """
 
+
     if request.GET:
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
+            
+            
             """
-            If the query isn't blank. I'm going to use a special object from Jango.db.models called Q to generate a search query.
+            If the query isn't blank then use a special object from django.db.models called Q to generate a search query.
             This deserves a bit of an explanation.
             In Django if you use something like product.objects.filter in order to filter a list of products. Everything will be ended together: In the
             case of our queries that would mean that when a user submits a query. In order for it to match the term would have to appear in both the
@@ -39,12 +47,20 @@ def all_products(request):
             Because of that, I'd strongly recommend that you become familiar with this and the other complex database functionality. By reading through
             the queries portion of the Django documentation.
             """
+           
+           
             queries = Q(name__icontains=query) | Q(description__icontains=query)
+            
+            
             """ 
             I'll set a variable equal to a Q object. Where the name contains the query. Or the description contains the query. The pipe here is what
             generates the 'or' statement. And the i in front of contains makes the queries case insensitive. With those queries constructed. 
             """
+
+
             products = products.filter(queries)
+           
+           
             # pass the queries (from line above) to the filter method in order to actually filter the products
 
     context = {
