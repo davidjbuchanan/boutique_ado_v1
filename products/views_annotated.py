@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product
+from .models import Product, Category
 
 # Create your views here.
 
@@ -12,10 +12,21 @@ def all_products(request):
 
     products = Product.objects.all()
     query = None
-
+    categories = None
 
     # start with it as none at the top of this view to ensure we don't get an error when loading the products page without a search term.
-
+    
+    
+    if request.GET:
+        if 'category' in request.GET:
+            # if it does exist then split it into a list at the commas
+            categories = request.GET['category'].split(',')
+            # use that list to filter the current query set of all products down to only products whose category name is in the list.
+            products = products.filter(category__name__in=categories)
+            # then filter all categories down to the ones whose name is in the list from the URL.
+            # note the double underscore syntax is common in django queries. Using it here means we're looking for the name field of the category model.
+            categories = Category.objects.filter(name__in=categories)
+            # we're converting the list of strings of category names passed through the URL into a list of actual category objects (called current_ categories below), so that we can access all their fields in the template.
 
     """
     Since we named the text input in the form as the letter q (see form in base.html or mobile-top-header.html). We can just check if q is in 
@@ -25,15 +36,14 @@ def all_products(request):
     Import messages, redirect, and reverse up top.
     """
 
-
-    if request.GET:
         if 'q' in request.GET:
+            # so check if it exists
             query = request.GET['q']
             if not query:
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
-            
-            
+
+
             """
             If the query isn't blank then use a special object from django.db.models called Q to generate a search query.
             This deserves a bit of an explanation.
@@ -47,11 +57,11 @@ def all_products(request):
             Because of that, I'd strongly recommend that you become familiar with this and the other complex database functionality. By reading through
             the queries portion of the Django documentation.
             """
-           
-           
+
+
             queries = Q(name__icontains=query) | Q(description__icontains=query)
-            
-            
+
+
             """ 
             I'll set a variable equal to a Q object. Where the name contains the query. Or the description contains the query. The pipe here is what
             generates the 'or' statement. And the i in front of contains makes the queries case insensitive. With those queries constructed. 
@@ -59,14 +69,16 @@ def all_products(request):
 
 
             products = products.filter(queries)
-           
-           
+
+
             # pass the queries (from line above) to the filter method in order to actually filter the products
 
     context = {
         'products': products,
         'search_term': query,
         # add the query to the context. And in the template call it search term
+        'current_categories': categories,
+        # Let's call that list of category objects, current_categories.
     }
 
     return render(request, 'products/products.html', context)

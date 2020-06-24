@@ -475,7 +475,8 @@ cli: git commit -m "added product details functionality"
 cli: git push
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
-Queries and Categories
+Search by word in the header's search bar
+
 Goto templates/base.html
     see form at line 49
         this is where the search form request is sent to
@@ -498,4 +499,22 @@ cli: python3 manage.py runserver
 
 cli: git add . 
 cli: git commit -m "Added search functionality"
+cli: git push
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Search by Category using the header's dropdown menus
+
+Goto templates/includes/main-nav.html
+    E.g. for Activewear & Essentials
+    In order to handle filtering by category, I'm gonna pass a category parameter to the products URL (see line 20) just like we're doing with q for search queries (in section above).
+    These parameters will use the name field (line 8) from the category model (products/views.py) so we have a programmatic way to access them.
+
+the url at products/urls.py needs no update
+the views.py does see annotated notes on views_annotated.py
+
+cli: python3 manage.py runserver    
+    works fine
+     notice that the view will filter all products based on there category name alone and post to the template
+cli: git add . 
+cli: git commit -m "Added category filtering"
 cli: git push
