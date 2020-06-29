@@ -79,8 +79,11 @@ They will always stay perfectly centred and have a consistent size unless we man
 }
 /*It's going to be a 100% height and width div. Fixed at the top left of the screen. With the white background and a z-index of negative 1 to make sure that it sits behind all the content. I'm putting this in base.css since we'll reuse it in most of the other templates on the site as well.*/
 
-
-
+a.category-badge > span.badge:hover {
+    background: #212529 !important;
+    color: #fff !important;
+}
+/*invert the colours of these badges when hovering over them. This background colour matches the bootstrap dark class so this will make the badges look similar to a bootstrap button with the dark class on them.*/
 
 /* -------------------------------- Media Queries */
 

@@ -537,3 +537,20 @@ cli: git commit -m "Added sorting"
 cli: git push
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 Sorting products 2
+
+render the category name (friendly) under each items name (in the products and product detail) pages:
+    update products/templates/products/products.html and products/templates/products/product_detail.html
+
+render a sort selector and breadcrumb in products/templates/products/products.html 
+
+then he updateds the views.py with 
+    """if sortkey == 'category':
+        sortkey = 'category__name'"""
+no idea why
+
+cli: git add . 
+cli: git commit -m "Added sorting and product counts to product page"
+cli: git push
+
+
+
