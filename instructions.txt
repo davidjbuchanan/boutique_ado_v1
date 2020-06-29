@@ -518,3 +518,22 @@ cli: python3 manage.py runserver
 cli: git add . 
 cli: git commit -m "Added category filtering"
 cli: git push
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorting products 1
+
+put links in main-nav.html, i.e.
+    <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+        <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
+        <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item ">By Rating</a>
+        <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
+        <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
+    </div>
+
+add to products/view.py
+
+cli: git add . 
+cli: git commit -m "Added sorting"
+cli: git push
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorting products 2
