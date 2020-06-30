@@ -628,3 +628,23 @@ Test
 cli: git add . 
 cli: git commit -m "Added bag context and delivery logic"
 cli: git push
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Adding products (to the shopping bag) part 1
+
+goto products/templates/products/product_detail.html
+    populate with form and update base.css with .btn-outline-black styling
+
+add an add_to_bag view to bag/views.py
+    populate
+
+add a url to bag/urls.py
+
+add an action attribute to the form in products/templates/products/product_detail.html
+    notr: the site will just error 500 if you add this too soon
+
+cli: python3 manage.py runserver
+    add stuff and see the dictionary grow on the cli
+
+cli: git add . 
+cli: git commit -m "added add to bag functionality"
+cli: git push
