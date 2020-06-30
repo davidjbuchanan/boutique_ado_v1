@@ -552,5 +552,17 @@ cli: git add .
 cli: git commit -m "Added sorting and product counts to product page"
 cli: git push
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorting products 3
+
+Allow the #sort-select-wrapper to work at products/templates/products.html
+    add JQ at bottom of page and Lower module to the view at products/views.py
+        Allows the name sorting to occur
+
+Added button to allow users to scrollto top of page. 
+
+cli: git add . 
+cli: git commit -m "Added sorting js and back to top link"
+cli: git push
 
 
