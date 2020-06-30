@@ -102,7 +102,7 @@ cli:mkdir templates
     this produces a project level templates file for base.html (so not an app based templates directory)
 
 cli:mkdir templates/allauth
-    puts an allauth dr in the templates dr (both or which will be in the project level)
+    puts an allauth dir in the templates dir (both of which will be in the project level)
 
 cli: git status
     see:
@@ -560,9 +560,42 @@ Allow the #sort-select-wrapper to work at products/templates/products.html
         Allows the name sorting to occur
 
 Added button to allow users to scrollto top of page. 
+    products/templates/products.html HTML and JQ
+    static/css/base.css
 
 cli: git add . 
 cli: git commit -m "Added sorting js and back to top link"
 cli: git push
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+The shopping bag
+cli: python3 managae.py startapp bag
+goto boutiquae_ado/settings.py
+    add to INSTALLED_APPS
 
+GOTO bag/views.py
+    All I'm doing is copying the view from the home app and changing its name the template it returns and it's docstring.
+
+Create bag/templates dir
+    cli: mkdir -p bag/templates/bag
+        create and add a bag.html to it
+            copying the index template from the home app - PASTE IT IN
+                remove contents of the 'block content'
+
+Copy the home URLs file. 
+    Create a new one in the bag app and paste it in.
+        update the view.
+        update the name.
+    And then include the bag URLs in the project level URLs file.
+
+Add link to base.html and mobile-top-header.html @ templates.
+
+cli: python3 manage.py runserver
+    click bag
+        link works - just an empty page with shell html i.e. bg and header
+
+update bag/templates/bag/bag.html
+
+cli: git add . 
+cli: git commit -m "Added shopping bag app urls and template"
+cli: git push

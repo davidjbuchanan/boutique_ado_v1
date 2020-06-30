@@ -23,5 +23,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('products/', include('products.urls')),
+    path('bag/', include('bag.urls')),
     # these are top level url path e.g. products/ (what goes in the search bar) and then the reference to the url in the products app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
