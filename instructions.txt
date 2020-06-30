@@ -599,3 +599,32 @@ update bag/templates/bag/bag.html
 cli: git add . 
 cli: git commit -m "Added shopping bag app urls and template"
 cli: git push
+
+At this point we have a page to display our shopping bag but we don't have any functionality to track what's in the bag.
+The first part of that functionality is going to live in a new file called contexts.py.
+
+cli: touch contexts.py
+    populate
+
+Note: inside this file, create a function called bag_contents. Which will take the request as a parameter. Instead of returning a template though this function will return a dictionary called context which we're about to create. This is what's known as a context processor. And its purpose is to make this dictionary available to all templates across the entire project, on every app. Much like you can use request.user in any template due to the presence of the built-in request context processor. 
+    This context concept is the same as the context we've been using in our views (e.g. ) the only difference is we're returning it directly and making it available to all templates by putting it in settings.py.
+
+In order to make this context processor available to the entire application we need to add it to the list of context processors in the templates variable in settings.py
+    goto settings.py
+        add to TEMPLATES
+            This simple change means that anytime we need to access the bag contents in any template across the entire site they'll be available to us
+            without having to return them from a whole bunch of different views across different apps.
+
+In order to entice customers to purchase more. We're going to give them free delivery if they spend more than the amount specified in the free delivery threshold in settings.py.
+    goto settings.py
+        Also added 2 new variables
+            FREE_DELIVERY_THRESHOLD = 50
+            STANDARD_DELIVERY_PERCENTAGE = 10
+Test
+    cli: python3 manage.py runserver
+        see:
+            banner shows "FREE DELIVERY ON ORDERS OVER $50!"
+                the "50" shows it is working
+cli: git add . 
+cli: git commit -m "Added bag context and delivery logic"
+cli: git push
