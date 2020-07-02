@@ -671,7 +671,7 @@ cli: git push
 Now that we know that works
     delete with {{ bag_items }}
     populate with table
-    
+
 cli: python3 manage.py runserver
     goto bag
     see items listed in table
@@ -679,3 +679,66 @@ cli: python3 manage.py runserver
 cli: git add . 
 cli: git commit -m "updated shopping bag template"
 cli: git push
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Adding products (to the shopping bag) part 3
+
+Enable users to be able to choose sizes
+    goto products/models.py
+        add has_sizes boolean to Product class
+        Because this is a change to the structure of the model. We'll need to run migrations for this.
+
+            cli: python3 manage.py makemigrations --dry-run
+                see: 
+                    Migrations for 'products':
+                    products/migrations/0002_auto_20200702_1119.py
+                    - Change Meta options on category   (made this change ages ago - changes catagory's to catagories)
+                    - Add field has_sizes to product
+            cli: python3 manage.py makemigrations
+                see new file in products/migrations
+                    0002_auto_20200702_1121.py
+            cli: python3 manage.py migrate --plan
+                see something similar to before - no new file
+            cli: python3 manage.py migrate
+                see: ok
+
+With that finished we're gonna dive into a very handy tool for exploring and making changes to the items in our database.
+    cli: python3 manage.py shell
+        What this does is drop us to a cli which is configured using our settings.py file. So it can act just as if we were writing python code in a view. This means we can import and use any functionality we'd like from our project which is great for operations you just need to do on the fly.
+
+    At the moment if you run the site and open /admin goto PRODUCTS-Products then choose a products you'll see a Has sizes field and as a default is set to no. To turn that to yes on some use the following shell commands)
+            In [1]: from products.models import Product
+            In [2]: kdbb = ['bed_bath','kitchen_dining']
+            In [3]: clothes = Product.objects.exlude[categotry__name__in='kdbb']
+            In [4]: clothes.count()
+            Out [4]: 130
+            In [5]: for item in clothes:
+                        item.has_sizes = True
+                        item.save()
+                        then press enter again to execute
+            In[6]: Product.objects.filter(has_sizes=True)
+                            # to check if they have filtered
+                            see:
+                                    a big list of 130 items 
+            In[7]: Product.objects.filter(has_sizes=True).count
+            Out [7]: 130
+            In [8]: exit()
+
+    Check the update has ocurred by running server -  opening /admin goto PRODUCTS-Products then choose a products you'll see a Has sizes field has updated to True for 130 cases. You have updated the database!
+
+Add a size-selector box to the product_detail page
+Goto products/templates/product_detail.html
+    add a size selector box
+
+when you render the site the box will appear on the correct products but doesn't do anything yet.
+
+
+Add size field to the bag.html
+    rendered site shows label but not correct value for items tha has_sizes=True
+
+cli: git add . 
+cli: git commit -m "added sizes to product model and size selector box to product template"
+cli: git push      
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Adding products (to the shopping bag) part 4
