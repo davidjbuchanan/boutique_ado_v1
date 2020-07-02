@@ -102,7 +102,8 @@
                                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
-                                    <!--we're checking whether this grand total template variable exists-->
+                                    <!--we're checking whether this grand total template variable exists
+                                    it comes from bag/contexts.py see context section at bottom-->
                                         ${{ grand_total|floatformat:2 }}
                                         <!-- if it does then we want to display the total formatted to two decimal places-->
                                     {% else %}

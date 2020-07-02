@@ -648,3 +648,22 @@ cli: python3 manage.py runserver
 cli: git add . 
 cli: git commit -m "added add to bag functionality"
 cli: git push
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Adding products (to the shopping bag) part 2
+
+Goto bag/context.py (the context processor)
+    add imports, bag session and for statement to populate the bag
+
+Goto bag/templates/bag.html
+    populate with {{ bag_items }} and test if bag populates
+
+cli: python3 manage.py runserver
+    add some items
+    check bag
+    should see dictionary with item id product name and quantity
+    also bag icon displayed with grand total
+
+cli: git add . 
+cli: git commit -m "updated context processor"
+cli: git push
