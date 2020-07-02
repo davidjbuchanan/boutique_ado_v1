@@ -9,9 +9,10 @@ def bag_contents(request):
     # an empty list for the bag items to live in.
     total = 0
     product_count = 0
-    """I'll also eventually need the total and the product count when we start adding things to the bag. So I'll initialize those now to zero.
+"""I'll also eventually need the total and the product count when we start adding things to the bag. So I'll initialize those now to zero.
+
+In order to populate the values of these variables we're not using yet. We need to iterate through all the items in the shopping bag. And along the way, tally up the total cost and product count. And add the products and their data to the bag items list. So we can display them on the shopping bag page. And elsewhere throughout the site."""
     
-    In order to populate the values of these variables we're not using yet. We need to iterate through all the items in the shopping bag. And along the way, tally up the total cost and product count. And add the products and their data to the bag items list. So we can display them on the shopping bag page. And elsewhere throughout the site."""
     bag = request.session.get('bag', {})
 
     for item_id, quantity in bag.items():
@@ -23,6 +24,7 @@ def bag_contents(request):
             'quantity': quantity,
             'product': product,
         })
+"""So for each item and quantity in bag.items. And notice that this is the bag from the session. I'll first get the product. Then add its quantity times the price to the total. And then increment the product count by the quantity. I'll also add a dictionary to the list of bag items containing not only the id and the quantity, But also the product object itself. Because that will give us access to all the other fields such as the product image and so on. When iterating through the bag items in our templates."""
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
         # check whether it's less than that threshold.
