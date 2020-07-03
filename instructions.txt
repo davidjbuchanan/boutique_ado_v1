@@ -742,3 +742,13 @@ cli: git push
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 Adding products (to the shopping bag) part 4
+
+
+Goto the site and look at special offers
+    and some products have sizes which shouldn't. go into admina and manually change has_sizes from yes to no and save.
+
+Now to the rendering of product sizes in the bag need to update context.py (context processor) and the add_to_bag view
+
+cli: git add . 
+cli: git commit -m "Finished product size logic"
+cli: git push

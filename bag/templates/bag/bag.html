@@ -24,8 +24,10 @@
         <div class="row">
             <div class="col">
                 {% if bag_items %}
-                <!--This variable, bag items will be created in the next step.
-                If there are items in the bag, I'll render this table.-->
+                    {{ bag_items }}
+                    <br>
+                    <br>
+                    {{ request.session.bag }}
                     <div class="table-responsive rounded"></div>
                         <table class="table table-sm table-borderless">
                             <thead class="text-black">
